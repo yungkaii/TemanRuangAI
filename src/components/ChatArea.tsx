@@ -14,6 +14,7 @@ import {
 import type { UIMessage } from 'ai'
 import CloudMascot from './CloudMascot'
 import CenterIllustration from './CenterIllustration'
+import MarkdownContent from './MarkdownContent'
 import { CONVERSATION_MODES, type ConversationMode } from '../server/ai-personality'
 
 interface ChatAreaProps {
@@ -93,6 +94,29 @@ export default function ChatArea({
     return (message as any).text || ''
   }
 
+  const messageTimestampsRef = useRef<Map<string, number>>(new Map())
+
+  function getMessageTimestamp(message: UIMessage, index: number): number {
+    const explicit =
+      (message as any).createdAt || (message.metadata as any)?.createdAt
+    if (explicit && typeof explicit === 'number') {
+      if (message.id) {
+        messageTimestampsRef.current.set(message.id, explicit)
+      }
+      return explicit
+    }
+
+    const key = message.id || `msg-${index}`
+    const existing = messageTimestampsRef.current.get(key)
+    if (existing) {
+      return existing
+    }
+
+    const now = Date.now()
+    messageTimestampsRef.current.set(key, now)
+    return now
+  }
+
   function formatTime(date?: Date | number): string {
     const d = date ? new Date(date) : new Date()
     const hours = d.getHours().toString().padStart(2, '0')
@@ -100,27 +124,6 @@ export default function ChatArea({
     return `${hours}:${mins}`
   }
 
-  // Format message text with clean paragraphs
-  function renderFormattedText(text: string) {
-    if (!text) return null
-    const paragraphs = text.split(/\n\n+/)
-
-    return paragraphs.map((para, idx) => {
-      const lines = para.split('\n')
-      return (
-        <p key={idx} className="mb-2.5 last:mb-0 leading-[1.6]">
-          {lines.map((line, lineIdx) => {
-            const isBullet = line.trim().startsWith('- ') || line.trim().startsWith('* ')
-            return (
-              <span key={lineIdx} className={isBullet ? 'block pl-2.5 my-0.5' : 'block'}>
-                {line}
-              </span>
-            )
-          })}
-        </p>
-      )
-    })
-  }
 
   const modeInfo = CONVERSATION_MODES[currentMode]
   const isApiKeyError =
@@ -134,43 +137,43 @@ export default function ChatArea({
   return (
     <div className="relative flex flex-1 flex-col h-full overflow-hidden bg-[#FDFBF6] dark:bg-[#0F1322]">
       {/* Top Header Bar Matching Screenshot */}
-      <header className="flex h-14 sm:h-16 shrink-0 items-center justify-between border-b border-[#EBE9F3] dark:border-[#1E2540] bg-[#FDFBF6]/90 dark:bg-[#151A2E]/80 backdrop-blur-md px-4 sm:px-7 z-10 select-none">
-        <div className="flex items-center gap-3">
+      <header className="flex h-14 sm:h-16 shrink-0 items-center justify-between border-b border-[#EBE9F3] dark:border-[#1E2540] bg-[#FDFBF6]/90 dark:bg-[#151A2E]/80 backdrop-blur-md px-3.5 sm:px-7 z-10 select-none">
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1 mr-2">
           {/* Mobile Menu Trigger */}
           <button
             type="button"
             onClick={onOpenMobileMenu}
-            className="md:hidden rounded-xl p-2 text-[#5E6585] hover:bg-[#EEF2FF] transition"
+            className="md:hidden rounded-xl p-2 text-[#5E6585] dark:text-[#94A3B8] hover:bg-[#EEF2FF] dark:hover:bg-indigo-950/40 transition shrink-0"
             aria-label="Buka menu navigasi"
           >
             <Menu className="h-5 w-5" />
           </button>
 
           {/* Mode Pill Badge Matching Screenshot */}
-          <div className="flex items-center gap-2.5 sm:gap-3 text-sm sm:text-base">
-            <span className="flex h-2.5 w-2.5 rounded-full bg-[#1FA971]" />
-            <span className="font-bold text-[#2B3590] dark:text-[#F8FAFC]">
+          <div className="flex items-center gap-2 sm:gap-2.5 min-w-0 text-sm sm:text-base">
+            <span className="flex h-2.5 w-2.5 rounded-full bg-[#1FA971] shrink-0" />
+            <span className="font-bold text-[#2B3590] dark:text-[#F8FAFC] truncate whitespace-nowrap">
               {modeInfo.label}
             </span>
-            <span className="h-4 w-px bg-[#DDE0EF] dark:bg-slate-700" />
-            <span className="text-xs sm:text-[13px] text-[#6B7399] font-medium flex items-center gap-2">
-              Teman yang selalu ada untukmu <Sparkle className="h-4 w-4 text-[#7C8CF8] stroke-[1.8]" />
+            <span className="hidden md:block h-4 w-px bg-[#DDE0EF] dark:bg-slate-700 shrink-0" />
+            <span className="hidden md:flex text-xs sm:text-[13px] text-[#6B7399] dark:text-[#94A3B8] font-medium items-center gap-1.5 whitespace-nowrap">
+              Teman yang selalu ada untukmu <Sparkle className="h-3.5 w-3.5 text-[#7C8CF8] stroke-[1.8]" />
             </span>
           </div>
         </div>
 
         {/* Clear Chat Button on Right */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           {messages.length > 0 && (
             <button
               type="button"
               onClick={onOpenClearDialog}
               aria-label="Bersihkan chat"
-              className="inline-flex items-center gap-2 rounded-2xl border border-[#E4E3F0] dark:border-[#2D3748] bg-white/70 dark:bg-[#151A2E] px-3.5 py-2 text-xs sm:text-[13px] font-semibold text-[#2B3590] dark:text-[#94A3B8] hover:bg-rose-50 dark:hover:bg-rose-950/20 hover:text-rose-600 transition shadow-sm"
+              className="inline-flex items-center gap-1.5 sm:gap-2 rounded-2xl border border-[#E4E3F0] dark:border-[#2D3748] bg-white/70 dark:bg-[#151A2E] px-2.5 py-1.5 sm:px-3.5 sm:py-2 text-xs sm:text-[13px] font-semibold text-[#2B3590] dark:text-[#94A3B8] hover:bg-rose-50 dark:hover:bg-rose-950/20 hover:text-rose-600 transition shadow-sm"
               title="Bersihkan percakapan saat ini"
             >
               <Trash2 className="h-4 w-4 text-[#5E6EF0]" />
-              <span>Bersihkan Chat</span>
+              <span className="hidden sm:inline">Bersihkan Chat</span>
             </button>
           )}
         </div>
@@ -227,7 +230,12 @@ export default function ChatArea({
               const isUser = message.role === 'user'
               const text = getMessageText(message)
               const isLastAssistant = !isUser && index === messages.length - 1
-              const timeString = formatTime()
+              const messageTime = getMessageTimestamp(message, index)
+              const timeString = formatTime(messageTime)
+              const fullDateTitle = new Date(messageTime).toLocaleString('id-ID', {
+                dateStyle: 'medium',
+                timeStyle: 'short',
+              })
 
               if (isUser) {
                 return (
@@ -245,7 +253,10 @@ export default function ChatArea({
                       </div>
                     </div>
 
-                    <span className="text-xs text-[#9AA0B8] mt-1 mr-2.5 sm:mr-11 font-medium">
+                    <span
+                      title={fullDateTitle}
+                      className="text-xs text-[#9AA0B8] mt-1 mr-2.5 sm:mr-11 font-medium select-none"
+                    >
                       {timeString}
                     </span>
                   </div>
@@ -265,13 +276,16 @@ export default function ChatArea({
                       {/* Clean AI Bubble matching screenshot */}
                       <div className="relative rounded-2xl border border-[#E3E8FB] dark:border-[#2D3748] bg-[#F1F3FE] dark:bg-[#1A213B] px-5 sm:px-6 py-4 text-[#2B3590] dark:text-[#F8FAFC] shadow-sm">
                         <div className="text-sm sm:text-[15px] font-medium leading-relaxed break-words">
-                          {renderFormattedText(text)}
+                          <MarkdownContent content={text} />
                         </div>
                       </div>
 
                       {/* Timestamp and subtle hover controls */}
                       <div className="flex items-center gap-2 mt-1.5 ml-1 px-0.5">
-                        <span className="text-xs text-[#9AA0B8] font-medium">
+                        <span
+                          title={fullDateTitle}
+                          className="text-xs text-[#9AA0B8] font-medium select-none"
+                        >
                           {timeString}
                         </span>
 

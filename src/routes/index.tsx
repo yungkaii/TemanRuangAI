@@ -36,7 +36,29 @@ function loadStoredSessions(): FullSession[] {
     const raw = window.localStorage.getItem(STORAGE_KEY_SESSIONS)
     if (!raw) return []
     const parsed = JSON.parse(raw)
-    return Array.isArray(parsed) ? parsed : []
+    if (!Array.isArray(parsed)) return []
+    return parsed.map((s) => ({
+      ...s,
+      messages: Array.isArray(s.messages)
+        ? s.messages.map((m: any, idx: number) => {
+            const explicit = m.createdAt || m.metadata?.createdAt
+            const createdAt =
+              explicit && typeof explicit === 'number'
+                ? explicit
+                : s.createdAt
+                ? s.createdAt + idx * 30000
+                : Date.now()
+            return {
+              ...m,
+              createdAt,
+              metadata: {
+                ...(m.metadata || {}),
+                createdAt,
+              },
+            }
+          })
+        : [],
+    }))
   } catch (e) {
     console.error('Failed to load sessions from localStorage', e)
     return []
@@ -170,9 +192,35 @@ function TemanRuangApp() {
             ? firstUserMsg.parts.map((p: any) => (p.type === 'text' ? p.text : '')).join('')
             : (firstUserMsg as any).text || ''
         if (text) {
-          title = text.slice(0, 32) + (text.length > 32 ? '...' : '')
+          const cleanText = text.replace(/[*_#`~]/g, '').trim()
+          title = (cleanText || text).slice(0, 32) + (text.length > 32 ? '...' : '')
         }
       }
+
+      const existingSession = existingIdx !== -1 ? prev[existingIdx] : null
+
+      // Ensure every message in the session has a stable, saved createdAt timestamp
+      const timestampedMessages = messages.map((m) => {
+        const explicit =
+          (m as any).createdAt || (m.metadata as any)?.createdAt
+        if (explicit && typeof explicit === 'number') {
+          return {
+            ...m,
+            createdAt: explicit,
+            metadata: { ...((m.metadata as any) || {}), createdAt: explicit },
+          }
+        }
+        const prevMsg = existingSession?.messages.find((pm) => pm.id === m.id)
+        const prevTime =
+          (prevMsg as any)?.createdAt || (prevMsg?.metadata as any)?.createdAt
+        const createdAt =
+          prevTime && typeof prevTime === 'number' ? prevTime : Date.now()
+        return {
+          ...m,
+          createdAt,
+          metadata: { ...((m.metadata as any) || {}), createdAt },
+        }
+      })
 
       let nextList: FullSession[]
       if (existingIdx !== -1) {
@@ -181,7 +229,7 @@ function TemanRuangApp() {
           ...nextList[existingIdx],
           title,
           mode: currentMode,
-          messages,
+          messages: timestampedMessages,
         }
       } else {
         nextList = [
@@ -190,7 +238,7 @@ function TemanRuangApp() {
             title,
             createdAt: Date.now(),
             mode: currentMode,
-            messages,
+            messages: timestampedMessages,
           },
           ...prev,
         ]
@@ -214,7 +262,8 @@ function TemanRuangApp() {
             ? sourceMsg.parts.map((p: any) => (p.type === 'text' ? p.text : '')).join('')
             : (sourceMsg as any).text || ''
         if (text) {
-          previewText = text.slice(0, 32) + (text.length > 32 ? '...' : '')
+          const cleanText = text.replace(/[*_#`~]/g, '').trim()
+          previewText = (cleanText || text).slice(0, 32) + (text.length > 32 ? '...' : '')
         }
       }
       return {
@@ -328,7 +377,10 @@ function TemanRuangApp() {
     setInput('')
 
     try {
-      await sendMessage({ text }, { body: { mode: currentMode } })
+      await sendMessage(
+        { text, metadata: { createdAt: Date.now() } },
+        { body: { mode: currentMode } }
+      )
     } catch (err) {
       console.error('[TemanRuang AI] Send error:', err)
     }
