@@ -2,8 +2,8 @@ export default function CenterIllustration() {
   const line = '#8E9BF2'
   const star = 'M0 -9 C1 -3 3 -1 9 0 C3 1 1 3 0 9 C-1 3 -3 1 -9 0 C-3 -1 -1 -3 0 -9Z'
   return (
-    <div className="flex flex-col items-center justify-center select-none py-4 pointer-events-none">
-      <div className="relative w-[300px] h-[160px] sm:w-[420px] sm:h-[220px] lg:w-[440px] lg:h-[232px]">
+    <div className="flex flex-col items-center justify-center select-none py-2 pointer-events-none">
+      <div className="relative w-[240px] h-[126px] sm:w-[300px] sm:h-[158px] lg:w-[330px] lg:h-[174px]">
         <svg viewBox="0 0 440 232" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
           {/* ground shadow */}
           <ellipse cx="220" cy="196" rx="205" ry="13" fill="#E8EBF8" opacity="0.8" />
@@ -65,13 +65,13 @@ export default function CenterIllustration() {
       </div>
 
       {/* caption */}
-      <div className="mt-4 text-center space-y-1">
-        <p className="font-hand text-lg sm:text-xl text-[#3B47A8] dark:text-[#C7D2FE] tracking-[0.14em]">Kamu nggak sendiri,</p>
-        <p className="font-hand text-lg sm:text-xl text-[#3B47A8] dark:text-[#C7D2FE] tracking-[0.14em]">aku selalu ada di sini.</p>
-        <div className="flex items-center justify-center gap-3 pt-2">
-          <span className="w-7 h-px bg-[#C3CBF3]" />
-          <svg viewBox="0 0 24 24" className="w-4 h-4 fill-[#8B98FA]"><path d="M12 21l-1.5-1.4C5.4 15 2 12 2 8.5 2 5.4 4.4 3 7.5 3c1.7 0 3.4.8 4.5 2.1C13.100 3.800 14.800 3 16.500 3 19.600 3 22 5.400 22 8.500c0 3.500-3.400 6.500-8.500 11.100L12 21z" /></svg>
-          <span className="w-7 h-px bg-[#C3CBF3]" />
+      <div className="mt-3 text-center space-y-0.5">
+        <p className="font-hand text-sm sm:text-base text-[#3B47A8] dark:text-[#C7D2FE] tracking-[0.08em]">Kamu nggak sendiri,</p>
+        <p className="font-hand text-sm sm:text-base text-[#3B47A8] dark:text-[#C7D2FE] tracking-[0.08em]">aku selalu ada di sini.</p>
+        <div className="flex items-center justify-center gap-2 pt-1.5">
+          <span className="w-5 h-px bg-[#C3CBF3]" />
+          <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-[#8B98FA]"><path d="M12 21l-1.5-1.4C5.4 15 2 12 2 8.5 2 5.4 4.4 3 7.5 3c1.7 0 3.4.8 4.5 2.1C13.100 3.800 14.800 3 16.500 3 19.600 3 22 5.400 22 8.500c0 3.500-3.400 6.500-8.500 11.100L12 21z" /></svg>
+          <span className="w-5 h-px bg-[#C3CBF3]" />
         </div>
       </div>
     </div>
