@@ -41,7 +41,7 @@ export function resolveAIModel(): ModelResolution {
   // 3. Check Google Generative AI / Gemini API Key
   const googleKey = env.GOOGLE_GENERATIVE_AI_API_KEY || env.GEMINI_API_KEY
   if (googleKey) {
-    const modelId = env.AI_MODEL || 'gemini-1.5-flash'
+    const modelId = env.AI_MODEL || 'gemini-3.5-flash'
     return {
       model: google(modelId) as unknown as LanguageModel,
       providerName: 'Google Gemini',
