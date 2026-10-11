@@ -134,27 +134,27 @@ export default function ChatArea({
   return (
     <div className="relative flex flex-1 flex-col h-full overflow-hidden bg-[#FDFBF6] dark:bg-[#0F1322]">
       {/* Top Header Bar Matching Screenshot */}
-      <header className="flex h-12 sm:h-14 shrink-0 items-center justify-between border-b border-[#EBE9F3] dark:border-[#1E2540] bg-[#FDFBF6]/90 dark:bg-[#151A2E]/80 backdrop-blur-md px-4 sm:px-6 z-10 select-none">
-        <div className="flex items-center gap-2.5">
+      <header className="flex h-14 sm:h-16 shrink-0 items-center justify-between border-b border-[#EBE9F3] dark:border-[#1E2540] bg-[#FDFBF6]/90 dark:bg-[#151A2E]/80 backdrop-blur-md px-4 sm:px-7 z-10 select-none">
+        <div className="flex items-center gap-3">
           {/* Mobile Menu Trigger */}
           <button
             type="button"
             onClick={onOpenMobileMenu}
-            className="md:hidden rounded-lg p-1.5 text-[#5E6585] hover:bg-[#EEF2FF] transition"
+            className="md:hidden rounded-xl p-2 text-[#5E6585] hover:bg-[#EEF2FF] transition"
             aria-label="Buka menu navigasi"
           >
-            <Menu className="h-4 w-4" />
+            <Menu className="h-5 w-5" />
           </button>
 
           {/* Mode Pill Badge Matching Screenshot */}
-          <div className="flex items-center gap-2 sm:gap-2.5 text-xs sm:text-sm">
+          <div className="flex items-center gap-2.5 sm:gap-3 text-sm sm:text-base">
             <span className="flex h-2.5 w-2.5 rounded-full bg-[#1FA971]" />
             <span className="font-bold text-[#2B3590] dark:text-[#F8FAFC]">
               {modeInfo.label}
             </span>
-            <span className="h-3.5 w-px bg-[#DDE0EF] dark:bg-slate-700" />
-            <span className="text-[11px] sm:text-xs text-[#6B7399] font-medium flex items-center gap-1.5">
-              Teman yang selalu ada untukmu <Sparkle className="h-3.5 w-3.5 text-[#7C8CF8] stroke-[1.8]" />
+            <span className="h-4 w-px bg-[#DDE0EF] dark:bg-slate-700" />
+            <span className="text-xs sm:text-[13px] text-[#6B7399] font-medium flex items-center gap-2">
+              Teman yang selalu ada untukmu <Sparkle className="h-4 w-4 text-[#7C8CF8] stroke-[1.8]" />
             </span>
           </div>
         </div>
@@ -166,10 +166,10 @@ export default function ChatArea({
               type="button"
               onClick={onOpenClearDialog}
               aria-label="Bersihkan chat"
-              className="inline-flex items-center gap-1.5 rounded-xl border border-[#E4E3F0] dark:border-[#2D3748] bg-white/70 dark:bg-[#151A2E] px-3 py-1.5 text-xs font-semibold text-[#2B3590] dark:text-[#94A3B8] hover:bg-rose-50 dark:hover:bg-rose-950/20 hover:text-rose-600 transition shadow-sm"
+              className="inline-flex items-center gap-2 rounded-2xl border border-[#E4E3F0] dark:border-[#2D3748] bg-white/70 dark:bg-[#151A2E] px-3.5 py-2 text-xs sm:text-[13px] font-semibold text-[#2B3590] dark:text-[#94A3B8] hover:bg-rose-50 dark:hover:bg-rose-950/20 hover:text-rose-600 transition shadow-sm"
               title="Bersihkan percakapan saat ini"
             >
-              <Trash2 className="h-3.5 w-3.5 text-[#5E6EF0]" />
+              <Trash2 className="h-4 w-4 text-[#5E6EF0]" />
               <span>Bersihkan Chat</span>
             </button>
           )}
@@ -184,15 +184,15 @@ export default function ChatArea({
         <span className="absolute top-[62%] right-[8%] text-[#FCD34D] text-base opacity-70">✦</span>
         <span className="absolute top-[76%] left-[11%] h-2 w-2 rounded-full bg-[#CFD6FB]" />
         <span className="absolute top-[64%] right-[11%] h-1.5 w-1.5 rounded-full bg-[#D5DBFB]" />
-        <span className="absolute top-[58%] left-[7%] h-7 w-10 rounded-full bg-[#EDEFFD] blur-[1px]" />
-        <span className="absolute top-[52%] right-[6%] h-6 w-9 rounded-full bg-[#EDEFFD] blur-[1px]" />
+        <span className="absolute top-[58%] left-[7%] h-8 w-12 rounded-full bg-[#EDEFFD] blur-[1px]" />
+        <span className="absolute top-[52%] right-[6%] h-6 w-10 rounded-full bg-[#EDEFFD] blur-[1px]" />
         <span className="absolute top-[67%] left-[36%] text-[#FCD34D] text-sm opacity-75">✦</span>
         <span className="absolute top-[65%] right-[15%] text-[#FCD34D] text-sm opacity-75">✦</span>
         <span className="absolute top-[48%] right-[33%] text-[#A5B4FC] text-xs opacity-50">✧</span>
 
         {/* Ambient bottom-right cloud shape */}
         <svg
-          className="absolute -bottom-10 -right-10 w-[340px] h-56 text-[#ECEFFD] dark:text-indigo-950/20 opacity-80"
+          className="absolute -bottom-10 -right-10 w-[380px] h-64 text-[#ECEFFD] dark:text-indigo-950/20 opacity-80"
           viewBox="0 0 300 180"
           fill="currentColor"
         >
@@ -201,7 +201,7 @@ export default function ChatArea({
 
         {/* Ambient bottom-left cloud shape */}
         <svg
-          className="absolute -bottom-12 -left-6 w-56 h-36 text-[#ECEFFD] dark:text-indigo-950/20 opacity-80"
+          className="absolute -bottom-12 -left-6 w-64 h-40 text-[#ECEFFD] dark:text-indigo-950/20 opacity-80"
           viewBox="0 0 300 180"
           fill="currentColor"
         >
@@ -213,16 +213,16 @@ export default function ChatArea({
       <div
         ref={scrollContainerRef}
         onScroll={handleScroll}
-        className="relative z-10 flex-1 overflow-y-auto px-3 py-4 sm:px-6 sm:py-5 space-y-4"
+        className="relative z-10 flex-1 overflow-y-auto px-4 py-5 sm:px-8 sm:py-6 space-y-5"
       >
         {/* Empty State: Center Illustration */}
         {messages.length === 0 ? (
-          <div className="mx-auto flex h-full min-h-[55vh] max-w-xl flex-col items-center justify-center text-center">
+          <div className="mx-auto flex h-full min-h-[58vh] max-w-xl flex-col items-center justify-center text-center">
             <CenterIllustration />
           </div>
         ) : (
           /* Active Chat Messages */
-          <div className="mx-auto w-full max-w-3xl lg:max-w-4xl space-y-4">
+          <div className="mx-auto w-full max-w-4xl lg:max-w-5xl space-y-5">
             {messages.map((message, index) => {
               const isUser = message.role === 'user'
               const text = getMessageText(message)
@@ -232,20 +232,20 @@ export default function ChatArea({
               if (isUser) {
                 return (
                   <div key={message.id || index} className="flex flex-col items-end">
-                    <div className="flex items-start gap-2 max-w-[85%] sm:max-w-[75%] justify-end">
-                      <div className="rounded-2xl bg-[#CDD6FD] dark:bg-[#3730A3] px-4 py-2.5 sm:px-5 sm:py-3 text-[#2B3590] dark:text-white">
-                        <div className="text-xs sm:text-sm font-medium leading-relaxed break-words whitespace-pre-wrap">
+                    <div className="flex items-start gap-2.5 max-w-[85%] sm:max-w-[75%] justify-end">
+                      <div className="rounded-2xl bg-[#CDD6FD] dark:bg-[#3730A3] px-5 py-3 sm:px-6 sm:py-3.5 text-[#2B3590] dark:text-white">
+                        <div className="text-sm sm:text-[15px] font-medium leading-relaxed break-words whitespace-pre-wrap">
                           {text}
                         </div>
                       </div>
 
                       {/* User Avatar Circle */}
-                      <div className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-[#E3E7FD] dark:bg-indigo-950/40 text-[#6F7DF0]">
-                        <User className="h-4 w-4 sm:h-4.5 sm:w-4.5 stroke-[1.8]" />
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#E3E7FD] dark:bg-indigo-950/40 text-[#6F7DF0]">
+                        <User className="h-5 w-5 stroke-[1.8]" />
                       </div>
                     </div>
 
-                    <span className="text-[10px] sm:text-[11px] text-[#9AA0B8] mt-1 mr-2 sm:mr-10 font-medium">
+                    <span className="text-xs text-[#9AA0B8] mt-1 mr-2.5 sm:mr-11 font-medium">
                       {timeString}
                     </span>
                   </div>
@@ -255,40 +255,40 @@ export default function ChatArea({
               // AI Message
               return (
                 <div key={message.id || index} className="flex flex-col items-start group">
-                  <div className="flex items-start gap-2.5 max-w-[92%] sm:max-w-[85%] lg:max-w-[80%]">
+                  <div className="flex items-start gap-3 max-w-[92%] sm:max-w-[85%] lg:max-w-[80%]">
                     {/* Cloud Avatar on Left */}
                     <div className="shrink-0 mt-0.5">
-                      <CloudMascot variant="avatar" size={34} />
+                      <CloudMascot variant="avatar" size={44} />
                     </div>
 
                     <div className="flex-1 min-w-0">
                       {/* Clean AI Bubble matching screenshot */}
-                      <div className="relative rounded-2xl border border-[#E3E8FB] dark:border-[#2D3748] bg-[#F1F3FE] dark:bg-[#1A213B] px-4 sm:px-5 py-3 sm:py-3.5 text-[#2B3590] dark:text-[#F8FAFC] shadow-sm">
-                        <div className="text-xs sm:text-sm font-normal leading-relaxed break-words">
+                      <div className="relative rounded-2xl border border-[#E3E8FB] dark:border-[#2D3748] bg-[#F1F3FE] dark:bg-[#1A213B] px-5 sm:px-6 py-4 text-[#2B3590] dark:text-[#F8FAFC] shadow-sm">
+                        <div className="text-sm sm:text-[15px] font-medium leading-relaxed break-words">
                           {renderFormattedText(text)}
                         </div>
                       </div>
 
                       {/* Timestamp and subtle hover controls */}
-                      <div className="flex items-center gap-2 mt-1 ml-1 px-0.5">
-                        <span className="text-[10px] sm:text-[11px] text-[#9AA0B8] font-medium">
+                      <div className="flex items-center gap-2 mt-1.5 ml-1 px-0.5">
+                        <span className="text-xs text-[#9AA0B8] font-medium">
                           {timeString}
                         </span>
 
                         <button
                           type="button"
                           onClick={() => handleCopy(text, message.id || String(index))}
-                          className="opacity-0 group-hover:opacity-100 transition flex items-center gap-1 text-[10px] text-[#8E95AF] hover:text-[#7886FA]"
+                          className="opacity-0 group-hover:opacity-100 transition flex items-center gap-1 text-[11px] text-[#8E95AF] hover:text-[#7886FA]"
                           title="Salin balasan"
                         >
                           {copiedId === (message.id || String(index)) ? (
                             <>
-                              <Check className="h-3 w-3 text-emerald-500" />
+                              <Check className="h-3.5 w-3.5 text-emerald-500" />
                               <span className="text-emerald-500">Disalin</span>
                             </>
                           ) : (
                             <>
-                              <Copy className="h-3 w-3" />
+                              <Copy className="h-3.5 w-3.5" />
                               <span>Salin</span>
                             </>
                           )}
@@ -298,10 +298,10 @@ export default function ChatArea({
                           <button
                             type="button"
                             onClick={onRetry}
-                            className="opacity-0 group-hover:opacity-100 transition inline-flex items-center gap-1 text-[10px] text-[#8E95AF] hover:text-[#7886FA]"
+                            className="opacity-0 group-hover:opacity-100 transition inline-flex items-center gap-1 text-[11px] text-[#8E95AF] hover:text-[#7886FA]"
                             title="Respon ulang"
                           >
-                            <RotateCcw className="h-3 w-3" />
+                            <RotateCcw className="h-3.5 w-3.5" />
                             <span>Respon ulang</span>
                           </button>
                         )}
@@ -314,10 +314,10 @@ export default function ChatArea({
 
             {/* AI Streaming Indicator */}
             {isLoading && (
-              <div className="flex items-start gap-2.5">
-                <CloudMascot variant="avatar" size={34} />
-                <div className="rounded-2xl rounded-tl-sm border border-[#E5EBFD] dark:border-[#2D3748] bg-[#F1F3FE] dark:bg-[#1A213B] px-3.5 py-2.5 shadow-sm">
-                  <div className="flex items-center gap-2 text-xs text-[#5E6585] dark:text-[#94A3B8]">
+              <div className="flex items-start gap-3">
+                <CloudMascot variant="avatar" size={44} />
+                <div className="rounded-2xl rounded-tl-sm border border-[#E5EBFD] dark:border-[#2D3748] bg-[#F1F3FE] dark:bg-[#1A213B] px-4 py-3 shadow-sm">
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-[#5E6585] dark:text-[#94A3B8]">
                     <span>TemanRuang sedang mendengarkan...</span>
                     <div className="flex items-center gap-1">
                       <span className="h-1.5 w-1.5 rounded-full bg-[#7886FA] typing-dot-1" />

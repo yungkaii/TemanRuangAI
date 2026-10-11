@@ -68,21 +68,21 @@ export default function Sidebar({
   const sidebarContent = (
     <div className="flex h-full flex-col overflow-hidden bg-gradient-to-b from-[#FBFBFF] to-[#F6F7FE] dark:from-[#151A2E] dark:to-[#151A2E] text-[#2B3590] dark:text-[#F8FAFC] select-none">
       {/* Brand Header */}
-      <div className={`border-b border-[#E6E9F8] dark:border-[#1E2540] ${isCollapsed ? 'px-2 py-3' : 'px-4 pt-4 pb-3 lg:px-5'}`}>
+      <div className={`border-b border-[#E6E9F8] dark:border-[#1E2540] ${isCollapsed ? 'px-2 py-3.5' : 'px-5 pt-5 pb-4'}`}>
         <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'justify-between'}`}>
-          <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-2.5'}`}>
-            <CloudMascot size={isCollapsed ? 32 : 46} />
+          <div className={`flex items-center ${isCollapsed ? 'justify-center' : 'gap-3'}`}>
+            <CloudMascot size={isCollapsed ? 36 : 56} />
             {!isCollapsed && (
               <div className="min-w-0">
-                <div className="flex items-baseline gap-1 leading-none">
-                  <span className="text-lg lg:text-[19px] font-extrabold tracking-tight text-[#2B3590] dark:text-[#F8FAFC]">
+                <div className="flex items-baseline gap-1.5 leading-none">
+                  <span className="text-xl lg:text-[22px] font-extrabold tracking-tight text-[#2B3590] dark:text-[#F8FAFC]">
                     TemanRuang
                   </span>
-                  <span className="text-lg lg:text-[19px] font-extrabold tracking-tight text-[#7C8CF8] dark:text-[#818CF8]">
+                  <span className="text-xl lg:text-[22px] font-extrabold tracking-tight text-[#7C8CF8] dark:text-[#818CF8]">
                     AI
                   </span>
                 </div>
-                <p className="text-[11px] text-[#6B7399] dark:text-[#94A3B8] mt-1 font-medium truncate">
+                <p className="text-xs lg:text-[13px] text-[#6B7399] dark:text-[#94A3B8] mt-1 font-medium truncate">
                   Cerita aja, aku dengerin.
                 </p>
               </div>
@@ -92,15 +92,15 @@ export default function Sidebar({
           <button
             type="button"
             onClick={onCloseMobile}
-            className="md:hidden rounded-lg p-1.5 text-[#9CA3AF] hover:bg-[#EEF2FF] dark:hover:bg-indigo-950/40 hover:text-[#1E2238] dark:hover:text-[#F8FAFC]"
+            className="md:hidden rounded-xl p-1.5 text-[#9CA3AF] hover:bg-[#EEF2FF] dark:hover:bg-indigo-950/40 hover:text-[#1E2238] dark:hover:text-[#F8FAFC]"
             aria-label="Tutup menu sidebar"
           >
-            <X className="h-4 w-4" />
+            <X className="h-4.5 w-4.5" />
           </button>
         </div>
 
         {/* Mulai Curhat Baru Button */}
-        <div className={isCollapsed ? 'mt-3 flex justify-center' : 'mt-3.5'}>
+        <div className={isCollapsed ? 'mt-3.5 flex justify-center' : 'mt-4'}>
           <button
             type="button"
             onClick={() => {
@@ -109,61 +109,61 @@ export default function Sidebar({
             }}
             className={
               isCollapsed
-                ? 'w-9 h-9 flex items-center justify-center rounded-xl bg-gradient-to-r from-[#7886F9] to-[#8E9DFB] text-white shadow-[0_4px_12px_-3px_rgba(120,134,250,0.5)] hover:brightness-105 active:scale-95 transition'
-                : 'w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#7886F9] to-[#8E9DFB] text-white h-10 px-3 font-semibold text-xs sm:text-sm shadow-[0_6px_16px_-6px_rgba(120,134,250,0.6)] hover:brightness-105 active:scale-[0.99] transition'
+                ? 'w-10 h-10 flex items-center justify-center rounded-2xl bg-gradient-to-r from-[#7886F9] to-[#8E9DFB] text-white shadow-[0_4px_14px_-3px_rgba(120,134,250,0.5)] hover:brightness-105 active:scale-95 transition'
+                : 'w-full flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-[#7886F9] to-[#8E9DFB] text-white h-11 lg:h-12 px-4 font-semibold text-sm lg:text-[15px] shadow-[0_8px_18px_-6px_rgba(120,134,250,0.6)] hover:brightness-105 active:scale-[0.99] transition'
             }
             title="Mulai Curhat Baru"
           >
-            <Plus className="h-4 w-4 stroke-[2.2]" />
+            <Plus className="h-4.5 w-4.5 stroke-[2.2]" />
             {!isCollapsed && <span>Mulai Curhat Baru</span>}
           </button>
         </div>
       </div>
 
       {/* Middle Scrollable Section */}
-      <div className={`flex-1 overflow-y-auto ${isCollapsed ? 'px-2 py-2.5 space-y-3' : 'px-4 lg:px-5 pb-3 space-y-4'}`}>
+      <div className={`flex-1 overflow-y-auto ${isCollapsed ? 'px-2 py-3 space-y-3' : 'px-5 pb-4 space-y-5'}`}>
         {/* Mode Selector */}
         {isCollapsed ? (
-          <div className="flex flex-col items-center gap-1.5 pb-2 border-b border-[#E6E9F8] dark:border-[#1E2540]">
+          <div className="flex flex-col items-center gap-2 pb-2 border-b border-[#E6E9F8] dark:border-[#1E2540]">
             <button
               type="button"
               onClick={() => onSelectMode('listen')}
               title="Dengerin Aku"
-              className={`w-9 h-9 rounded-xl flex items-center justify-center transition border ${
+              className={`w-10 h-10 rounded-2xl flex items-center justify-center transition border ${
                 currentMode === 'listen'
                   ? 'bg-[#EEF1FF] dark:bg-indigo-950/60 border-[#BCC6FB] text-[#7380FA] shadow-sm'
                   : 'border-transparent text-[#7886FA] hover:bg-white/80 dark:hover:bg-[#1A2038]'
               }`}
             >
-              <Heart className="h-3.5 w-3.5 fill-current" />
+              <Heart className="h-4 w-4 fill-current" />
             </button>
             <button
               type="button"
               onClick={() => onSelectMode('advice')}
               title="Kasih Aku Saran"
-              className={`w-9 h-9 rounded-xl flex items-center justify-center transition border ${
+              className={`w-10 h-10 rounded-2xl flex items-center justify-center transition border ${
                 currentMode === 'advice'
                   ? 'bg-[#E0F2FE] dark:bg-sky-950/60 border-[#BAE6FD] text-[#38BDF8] shadow-sm'
                   : 'border-transparent text-[#38BDF8] hover:bg-white/80 dark:hover:bg-[#1A2038]'
               }`}
             >
-              <Lightbulb className="h-3.5 w-3.5" />
+              <Lightbulb className="h-4 w-4" />
             </button>
             <button
               type="button"
               onClick={() => onSelectMode('solution')}
               title="Bantu Aku Cari Solusi"
-              className={`w-9 h-9 rounded-xl flex items-center justify-center transition border ${
+              className={`w-10 h-10 rounded-2xl flex items-center justify-center transition border ${
                 currentMode === 'solution'
                   ? 'bg-[#DCFCE7] dark:bg-emerald-950/60 border-[#BBF7D0] text-[#22C55E] shadow-sm'
                   : 'border-transparent text-[#22C55E] hover:bg-white/80 dark:hover:bg-[#1A2038]'
               }`}
             >
-              <Sprout className="h-3.5 w-3.5" />
+              <Sprout className="h-4 w-4" />
             </button>
           </div>
         ) : (
-          <div className="pt-1">
+          <div className="pt-2">
             <ModeSelector currentMode={currentMode} onSelectMode={onSelectMode} />
           </div>
         )}
@@ -171,14 +171,14 @@ export default function Sidebar({
         {/* Session Conversation History */}
         <div>
           {!isCollapsed && (
-            <div className="flex items-center justify-between px-0.5 mb-2">
-              <div className="flex items-center gap-1.5">
-                <Clock className="h-3.5 w-3.5 text-[#6F7DDB] dark:text-[#94A3B8]" />
-                <span className="text-[11px] font-bold uppercase tracking-wide text-[#4A57B0] dark:text-[#94A3B8]">
+            <div className="flex items-center justify-between px-0.5 mb-2.5">
+              <div className="flex items-center gap-2">
+                <Clock className="h-4 w-4 text-[#6F7DDB] dark:text-[#94A3B8]" />
+                <span className="text-xs font-bold uppercase tracking-wide text-[#4A57B0] dark:text-[#94A3B8]">
                   Riwayat Sesi Ini
                 </span>
               </div>
-              <span className="text-[11px] text-[#8E95AF] dark:text-[#94A3B8]">
+              <span className="text-xs text-[#8E95AF] dark:text-[#94A3B8]">
                 {sessions.length} percakapan
               </span>
             </div>
@@ -186,14 +186,14 @@ export default function Sidebar({
 
           {sessions.length === 0 ? (
             !isCollapsed && (
-              <div className="rounded-2xl border border-dashed border-[#DDE2F7] dark:border-[#1E2540] p-3 text-center">
+              <div className="rounded-2xl border border-dashed border-[#DDE2F7] dark:border-[#1E2540] p-3.5 text-center">
                 <p className="text-xs text-[#8E95AF] dark:text-[#94A3B8]">
                   Belum ada sesi aktif. Mulai curhatmu sekarang.
                 </p>
               </div>
             )
           ) : (
-            <div className={isCollapsed ? 'space-y-1.5 flex flex-col items-center' : 'space-y-1.5'}>
+            <div className={isCollapsed ? 'space-y-2 flex flex-col items-center' : 'space-y-2'}>
               {sessions.map((sess) => {
                 const isActive = sess.id === activeSessionId
                 const title = sess.title || getModeDisplayTitle(sess.mode)
@@ -209,13 +209,13 @@ export default function Sidebar({
                         onCloseMobile()
                       }}
                       title={`${title}\n${preview}`}
-                      className={`w-9 h-9 flex items-center justify-center rounded-xl transition border ${
+                      className={`w-10 h-10 flex items-center justify-center rounded-2xl transition border ${
                         isActive
                           ? 'border-[#BCC6FB] dark:border-[#38437A] bg-[#EEF1FF] dark:bg-indigo-950/60 text-[#7380FA] shadow-sm'
                           : 'border-transparent hover:border-[#E2E6F8] dark:hover:border-[#2D3748] hover:bg-white dark:hover:bg-[#1A2038] text-[#6F7DF0] dark:text-[#94A3B8]'
                       }`}
                     >
-                      <MessageSquareText className="h-3.5 w-3.5" />
+                      <MessageSquareText className="h-4 w-4" />
                     </button>
                   )
                 }
@@ -228,28 +228,28 @@ export default function Sidebar({
                       onSelectSession(sess.id)
                       onCloseMobile()
                     }}
-                    className={`w-full text-left flex items-center justify-between rounded-xl px-2.5 py-2 transition border ${
+                    className={`w-full text-left flex items-center justify-between rounded-2xl px-3 py-2.5 transition border ${
                       isActive
-                        ? 'border-[#BCC6FB] dark:border-[#38437A] bg-[#EEF1FF] dark:bg-indigo-950/40 shadow-[0_3px_10px_-5px_rgba(120,134,250,0.3)]'
+                        ? 'border-[#BCC6FB] dark:border-[#38437A] bg-[#EEF1FF] dark:bg-indigo-950/40 shadow-[0_4px_12px_-5px_rgba(120,134,250,0.35)]'
                         : 'border-transparent hover:border-[#E2E6F8] dark:hover:border-[#2D3748] hover:bg-white dark:hover:bg-[#1A2038]'
                     }`}
                   >
-                    <div className="flex items-center gap-2.5 min-w-0 flex-1">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#DDE2FD] dark:bg-indigo-950/60 text-[#6F7DF0] dark:text-[#818CF8]">
-                        <MessageSquareText className="h-4 w-4" />
+                    <div className="flex items-center gap-3 min-w-0 flex-1">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#DDE2FD] dark:bg-indigo-950/60 text-[#6F7DF0] dark:text-[#818CF8]">
+                        <MessageSquareText className="h-4.5 w-4.5" />
                       </div>
 
                       <div className="min-w-0 flex-1 pr-1">
-                        <p className="font-semibold text-xs text-[#2B3590] dark:text-[#F8FAFC] truncate leading-tight">
+                        <p className="font-semibold text-sm text-[#2B3590] dark:text-[#F8FAFC] truncate leading-tight">
                           {title}
                         </p>
-                        <p className="text-[11px] text-[#6B7399] dark:text-[#94A3B8] truncate mt-0.5">
+                        <p className="text-xs text-[#6B7399] dark:text-[#94A3B8] truncate mt-0.5">
                           {preview}
                         </p>
                       </div>
                     </div>
 
-                    <ChevronRight className="h-3.5 w-3.5 text-[#7C8CF8] shrink-0" />
+                    <ChevronRight className="h-4 w-4 text-[#7C8CF8] shrink-0" />
                   </button>
                 )
               })}
@@ -259,17 +259,17 @@ export default function Sidebar({
       </div>
 
       {/* Footer Section */}
-      <div className={`border-t border-[#E6E9F8] dark:border-[#1E2540] ${isCollapsed ? 'px-2 py-2 space-y-1.5' : 'px-4 lg:px-5 py-2.5 space-y-1'}`}>
+      <div className={`border-t border-[#E6E9F8] dark:border-[#1E2540] ${isCollapsed ? 'px-2 py-2.5 space-y-2' : 'px-5 py-3 space-y-1.5'}`}>
         {isCollapsed ? (
-          <div className="flex flex-col items-center gap-1.5">
+          <div className="flex flex-col items-center gap-2">
             {/* Privasi Icon */}
             <button
               type="button"
               onClick={onOpenPrivacy}
               title="Privasi Terjaga - Sesi kamu aman dan rahasia"
-              className="w-9 h-9 flex items-center justify-center rounded-xl text-[#6F7DF0] dark:text-[#818CF8] hover:bg-white/80 dark:hover:bg-[#1A2038] transition"
+              className="w-10 h-10 flex items-center justify-center rounded-2xl text-[#6F7DF0] dark:text-[#818CF8] hover:bg-white/80 dark:hover:bg-[#1A2038] transition"
             >
-              <ShieldPlus className="h-4 w-4 stroke-[1.8]" />
+              <ShieldPlus className="h-5 w-5 stroke-[1.8]" />
             </button>
 
             {/* Settings Icon */}
@@ -277,9 +277,9 @@ export default function Sidebar({
               type="button"
               onClick={onOpenSettings}
               title="Pengaturan"
-              className="w-9 h-9 flex items-center justify-center rounded-xl text-[#6F7DF0] dark:text-[#818CF8] hover:bg-white/80 dark:hover:bg-[#1A2038] transition"
+              className="w-10 h-10 flex items-center justify-center rounded-2xl text-[#6F7DF0] dark:text-[#818CF8] hover:bg-white/80 dark:hover:bg-[#1A2038] transition"
             >
-              <Settings className="h-4 w-4 stroke-[1.8]" />
+              <Settings className="h-5 w-5 stroke-[1.8]" />
             </button>
 
             {/* Expand Toggle Button */}
@@ -288,9 +288,9 @@ export default function Sidebar({
               onClick={onToggleCollapse}
               aria-label="Perluas sidebar"
               title="Perluas sidebar"
-              className="w-9 h-9 flex items-center justify-center rounded-xl border border-[#DDE2F7] dark:border-[#1E2540] bg-white dark:bg-[#151A2E] text-[#7C8CF8] hover:bg-[#EEF1FF] dark:hover:bg-indigo-950/40 shadow-sm transition"
+              className="w-10 h-10 flex items-center justify-center rounded-2xl border border-[#DDE2F7] dark:border-[#1E2540] bg-white dark:bg-[#151A2E] text-[#7C8CF8] hover:bg-[#EEF1FF] dark:hover:bg-indigo-950/40 shadow-sm transition"
             >
-              <ChevronRight className="h-3.5 w-3.5" />
+              <ChevronRight className="h-4 w-4" />
             </button>
           </div>
         ) : (
@@ -298,14 +298,14 @@ export default function Sidebar({
             <button
               type="button"
               onClick={onOpenPrivacy}
-              className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-xl hover:bg-white/70 dark:hover:bg-[#1A2038] transition text-left"
+              className="w-full flex items-center gap-3 px-2.5 py-2 rounded-2xl hover:bg-white/70 dark:hover:bg-[#1A2038] transition text-left"
             >
-              <ShieldPlus className="h-4 w-4 shrink-0 text-[#6F7DF0] dark:text-[#818CF8] stroke-[1.8]" />
+              <ShieldPlus className="h-5 w-5 shrink-0 text-[#6F7DF0] dark:text-[#818CF8] stroke-[1.8]" />
               <div className="min-w-0 flex-1">
-                <p className="font-semibold text-xs text-[#2B3590] dark:text-[#F8FAFC] leading-tight">
+                <p className="font-semibold text-sm text-[#2B3590] dark:text-[#F8FAFC] leading-tight">
                   Privasi Terjaga
                 </p>
-                <p className="text-[10px] text-[#6B7399] dark:text-[#94A3B8]">
+                <p className="text-xs text-[#6B7399] dark:text-[#94A3B8]">
                   Sesi kamu aman dan rahasia.
                 </p>
               </div>
@@ -314,27 +314,27 @@ export default function Sidebar({
             <button
               type="button"
               onClick={onOpenSettings}
-              className="w-full flex items-center justify-between px-2 py-1.5 rounded-xl hover:bg-white/70 dark:hover:bg-[#1A2038] transition text-left"
+              className="w-full flex items-center justify-between px-2.5 py-2 rounded-2xl hover:bg-white/70 dark:hover:bg-[#1A2038] transition text-left"
             >
-              <div className="flex items-center gap-2.5 min-w-0">
-                <Settings className="h-4 w-4 shrink-0 text-[#6F7DF0] dark:text-[#818CF8] stroke-[1.8]" />
-                <span className="font-semibold text-xs text-[#2B3590] dark:text-[#F8FAFC]">
+              <div className="flex items-center gap-3 min-w-0">
+                <Settings className="h-5 w-5 shrink-0 text-[#6F7DF0] dark:text-[#818CF8] stroke-[1.8]" />
+                <span className="font-semibold text-sm text-[#2B3590] dark:text-[#F8FAFC]">
                   Pengaturan
                 </span>
               </div>
-              <ChevronRight className="h-3.5 w-3.5 text-[#7C8CF8] shrink-0" />
+              <ChevronRight className="h-4 w-4 text-[#7C8CF8] shrink-0" />
             </button>
 
             {/* Collapse Button */}
-            <div className="pt-0.5 flex justify-end">
+            <div className="pt-1 flex justify-end">
               <button
                 type="button"
                 onClick={onToggleCollapse}
                 aria-label="Ciutkan sidebar"
                 title="Ciutkan sidebar"
-                className="flex items-center justify-center h-7 w-7 rounded-lg border border-[#DDE2F7] dark:border-[#1E2540] bg-white dark:bg-[#151A2E] text-[#7C8CF8] hover:bg-[#EEF1FF] dark:hover:bg-indigo-950/40 shadow-sm transition"
+                className="flex items-center justify-center h-8 w-8 rounded-xl border border-[#DDE2F7] dark:border-[#1E2540] bg-white dark:bg-[#151A2E] text-[#7C8CF8] hover:bg-[#EEF1FF] dark:hover:bg-indigo-950/40 shadow-sm transition"
               >
-                <ChevronLeft className="h-3.5 w-3.5" />
+                <ChevronLeft className="h-4 w-4" />
               </button>
             </div>
           </>
@@ -348,7 +348,7 @@ export default function Sidebar({
       {/* Desktop Sidebar */}
       <aside
         className={`relative hidden md:flex flex-col flex-shrink-0 border-r border-[#E6E9F8] dark:border-[#1E2540] bg-[#FBFBFF] dark:bg-[#151A2E] transition-all duration-300 z-20 ${
-          isCollapsed ? 'w-[68px]' : 'w-64 lg:w-[272px]'
+          isCollapsed ? 'w-[74px]' : 'w-72 lg:w-[310px]'
         }`}
       >
         {sidebarContent}
@@ -364,7 +364,7 @@ export default function Sidebar({
 
       {/* Mobile Drawer */}
       <div
-        className={`md:hidden fixed inset-y-0 left-0 z-50 w-64 max-w-[85vw] bg-white dark:bg-[#151A2E] shadow-2xl transition-transform duration-300 ease-in-out border-r border-[#ECE8F6] dark:border-[#1E2540] ${
+        className={`md:hidden fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] bg-white dark:bg-[#151A2E] shadow-2xl transition-transform duration-300 ease-in-out border-r border-[#ECE8F6] dark:border-[#1E2540] ${
           isMobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
