@@ -1,0 +1,207 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Patrick+Hand&display=swap");
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --font-hand: "Patrick Hand", "Plus Jakarta Sans", ui-rounded, sans-serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+:root {
+  --bg-canvas: #FDFBF6;
+  --bg-sidebar: #FFFFFF;
+  --bg-surface: #FFFFFF;
+  --bg-surface-subtle: #F8F9FE;
+  --bg-lavender-soft: #EEF2FF;
+  --bg-lavender-subtle: #F5F7FF;
+  --border-subtle: #ECE8F6;
+  --border-card: #EAE6F5;
+  --border-active: #7886FA;
+  --text-primary: #1E2238;
+  --text-secondary: #5E6585;
+  --text-muted: #8E95AF;
+  --brand-primary: #7886FA;
+  --brand-hover: #6675F5;
+  --brand-light: #EEF2FF;
+  --bubble-user: #D0DBFE;
+  --bubble-user-text: #1E2238;
+  --bubble-ai: #F7F9FF;
+  --bubble-ai-border: #E6ECFE;
+  --bubble-ai-text: #1E2238;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 4px 20px -2px rgba(120, 134, 250, 0.07), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+  --shadow-elevated: 0 16px 40px -6px rgba(120, 134, 250, 0.12), 0 4px 14px -2px rgba(0, 0, 0, 0.04);
+}
+
+:root[data-theme="dark"],
+:root.dark {
+  --bg-canvas: #0F1322;
+  --bg-sidebar: #151A2E;
+  --bg-surface: #151A2E;
+  --bg-surface-subtle: #1A2038;
+  --bg-lavender-soft: rgba(120, 134, 250, 0.16);
+  --bg-lavender-subtle: rgba(120, 134, 250, 0.08);
+  --border-subtle: rgba(165, 180, 252, 0.16);
+  --border-card: rgba(165, 180, 252, 0.14);
+  --border-active: #818CF8;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --brand-primary: #818CF8;
+  --brand-hover: #93C5FD;
+  --brand-light: rgba(129, 140, 248, 0.15);
+  --bubble-user: #4338CA;
+  --bubble-user-text: #FFFFFF;
+  --bubble-ai: #1A213B;
+  --bubble-ai-border: rgba(165, 180, 252, 0.18);
+  --bubble-ai-text: #F8FAFC;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+  --shadow-elevated: 0 16px 40px -6px rgba(0, 0, 0, 0.7);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Cute ambient decorative clouds and blobs */
+.cute-ambient-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.cloud-blob-bottom-right {
+  position: absolute;
+  bottom: -60px;
+  right: -60px;
+  width: 480px;
+  height: 380px;
+  border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+  background: radial-gradient(circle at 40% 40%, rgba(224, 231, 255, 0.8), rgba(240, 244, 255, 0.4));
+  filter: blur(24px);
+}
+
+.cloud-blob-bottom-left {
+  position: absolute;
+  bottom: -40px;
+  left: 280px;
+  width: 320px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(238, 242, 255, 0.7), transparent 70%);
+  filter: blur(30px);
+}
+
+.cloud-blob-top-right {
+  position: absolute;
+  top: 40px;
+  right: 120px;
+  width: 260px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(254, 243, 199, 0.4), transparent 70%);
+  filter: blur(28px);
+}
+
+:root[data-theme="dark"] .cloud-blob-bottom-right,
+:root.dark .cloud-blob-bottom-right {
+  background: radial-gradient(circle at 40% 40%, rgba(99, 102, 241, 0.12), transparent);
+}
+
+:root[data-theme="dark"] .cloud-blob-bottom-left,
+:root.dark .cloud-blob-bottom-left {
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.08), transparent 70%);
+}
+
+:root[data-theme="dark"] .cloud-blob-top-right,
+:root.dark .cloud-blob-top-right {
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.05), transparent 70%);
+}
+
+/* Custom smooth scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(142, 149, 175, 0.22);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(142, 149, 175, 0.38);
+}
+
+/* Floating sparkles */
+@keyframes sparkle-float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-4px) scale(1.1);
+    opacity: 1;
+  }
+}
+
+.animate-sparkle {
+  animation: sparkle-float 3s ease-in-out infinite;
+}
+
+/* Typing dot animation */
+@keyframes dot-bounce {
+  0%, 80%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  40% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.typing-dot-1 {
+  animation: dot-bounce 1.3s infinite ease-in-out;
+  animation-delay: 0s;
+}
+
+.typing-dot-2 {
+  animation: dot-bounce 1.3s infinite ease-in-out;
+  animation-delay: 0.18s;
+}
+
+.typing-dot-3 {
+  animation: dot-bounce 1.3s infinite ease-in-out;
+  animation-delay: 0.36s;
+}
+
+.font-hand {
+  font-family: var(--font-hand);
+}
