@@ -72,6 +72,7 @@ function TemanRuangApp() {
   const [currentMode, setCurrentMode] = useState<ConversationMode>('listen')
   const currentModeRef = useRef<ConversationMode>('listen')
   currentModeRef.current = currentMode
+  const isSwitchingSessionRef = useRef(false)
 
   const [input, setInput] = useState('')
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
@@ -151,6 +152,10 @@ function TemanRuangApp() {
   // Sync active session whenever messages or mode changes
   useEffect(() => {
     if (!isHydrated) return
+    if (isSwitchingSessionRef.current) {
+      isSwitchingSessionRef.current = false
+      return
+    }
     if (messages.length === 0) return
 
     setSessionList((prev) => {
@@ -241,6 +246,7 @@ function TemanRuangApp() {
 
     const target = sessionList.find((s) => s.id === id)
     if (target) {
+      isSwitchingSessionRef.current = true
       setActiveSessionId(target.id)
       saveStoredActiveId(target.id)
       setCurrentMode(target.mode || 'listen')
@@ -268,11 +274,16 @@ function TemanRuangApp() {
 
   // Handle deleting a session from history
   function handleDeleteSession(id: string) {
+    if (isLoading && id === activeSessionId) {
+      stop()
+    }
+
     const updated = sessionList.filter((s) => s.id !== id)
     setSessionList(updated)
     saveStoredSessions(updated)
 
     if (id === activeSessionId) {
+      isSwitchingSessionRef.current = true
       if (updated.length > 0) {
         const next = updated[0]
         setActiveSessionId(next.id)
@@ -349,6 +360,7 @@ function TemanRuangApp() {
         onSelectSession={handleSelectSession}
         onNewSession={() => handleNewSession(false)}
         onDeleteSession={handleDeleteSession}
+        onClearAllSessions={handleClearAllSessions}
         isCollapsed={isSidebarCollapsed}
         onToggleCollapse={() => setIsSidebarCollapsed((prev) => !prev)}
         isMobileOpen={isMobileDrawerOpen}

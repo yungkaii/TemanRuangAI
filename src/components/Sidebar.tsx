@@ -10,7 +10,9 @@ import {
   Heart,
   Lightbulb,
   Sprout,
+  Trash2,
 } from 'lucide-react'
+import { useState } from 'react'
 import CloudMascot from './CloudMascot'
 import ModeSelector from './ModeSelector'
 import type { ConversationMode } from '../server/ai-personality'
@@ -32,6 +34,7 @@ interface SidebarProps {
   onSelectSession: (id: string) => void
   onNewSession: () => void
   onDeleteSession: (id: string) => void
+  onClearAllSessions?: () => void
   isCollapsed: boolean
   onToggleCollapse: () => void
   isMobileOpen: boolean
@@ -47,6 +50,8 @@ export default function Sidebar({
   activeSessionId,
   onSelectSession,
   onNewSession,
+  onDeleteSession,
+  onClearAllSessions,
   isCollapsed,
   onToggleCollapse,
   isMobileOpen,
@@ -54,6 +59,8 @@ export default function Sidebar({
   onOpenPrivacy,
   onOpenSettings,
 }: SidebarProps) {
+  const [sessionToDelete, setSessionToDelete] = useState<{ id: string; title: string } | null>(null)
+  const [isConfirmClearAllOpen, setIsConfirmClearAllOpen] = useState(false)
   function getModeDisplayTitle(mode: ConversationMode): string {
     switch (mode) {
       case 'listen':
@@ -175,9 +182,22 @@ export default function Sidebar({
                   Riwayat Sesi Ini
                 </span>
               </div>
-              <span className="text-xs text-[#8E95AF] dark:text-[#94A3B8]">
-                {sessions.length} percakapan
-              </span>
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs text-[#8E95AF] dark:text-[#94A3B8]">
+                  {sessions.length} percakapan
+                </span>
+                {onClearAllSessions && sessions.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => setIsConfirmClearAllOpen(true)}
+                    className="p-1 rounded-lg text-[#8E95AF] hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition"
+                    title="Hapus semua riwayat sesi"
+                    aria-label="Hapus semua riwayat sesi"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" />
+                  </button>
+                )}
+              </div>
             </div>
           )}
 
@@ -198,39 +218,64 @@ export default function Sidebar({
 
                 if (isCollapsed) {
                   return (
-                    <button
-                      key={sess.id}
-                      type="button"
-                      onClick={() => {
-                        onSelectSession(sess.id)
-                        onCloseMobile()
-                      }}
-                      title={`${title}\n${preview}`}
-                      className={`w-10 h-10 flex items-center justify-center rounded-2xl transition border ${isActive
-                        ? 'border-[#BCC6FB] dark:border-[#38437A] bg-[#EEF1FF] dark:bg-indigo-950/60 text-[#7380FA] shadow-sm'
-                        : 'border-transparent hover:border-[#E2E6F8] dark:hover:border-[#2D3748] hover:bg-white dark:hover:bg-[#1A2038] text-[#6F7DF0] dark:text-[#94A3B8]'
-                        }`}
-                    >
-                      <MessageSquareText className="h-4 w-4" />
-                    </button>
+                    <div key={sess.id} className="relative group">
+                      <button
+                        key={sess.id}
+                        type="button"
+                        onClick={() => {
+                          onSelectSession(sess.id)
+                          onCloseMobile()
+                        }}
+                        title={`${title}\n${preview}`}
+                        className={`w-10 h-10 flex items-center justify-center rounded-2xl transition border ${isActive
+                          ? 'border-[#BCC6FB] dark:border-[#38437A] bg-[#EEF1FF] dark:bg-indigo-950/60 text-[#7380FA] shadow-sm'
+                          : 'border-transparent hover:border-[#E2E6F8] dark:hover:border-[#2D3748] hover:bg-white dark:hover:bg-[#1A2038] text-[#6F7DF0] dark:text-[#94A3B8]'
+                          }`}
+                      >
+                        <MessageSquareText className="h-4 w-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          setSessionToDelete({ id: sess.id, title })
+                        }}
+                        title={`Hapus ${title}`}
+                        aria-label={`Hapus ${title}`}
+                        className="absolute -top-1 -right-1 hidden group-hover:flex h-5 w-5 items-center justify-center rounded-full bg-rose-500 text-white shadow-sm hover:bg-rose-600 transition"
+                      >
+                        <X className="h-3 w-3 stroke-[2.5]" />
+                      </button>
+                    </div>
                   )
                 }
 
                 return (
-                  <button
+                  <div
                     key={sess.id}
-                    type="button"
+                    role="button"
+                    tabIndex={0}
                     onClick={() => {
                       onSelectSession(sess.id)
                       onCloseMobile()
                     }}
-                    className={`w-full text-left flex items-center justify-between rounded-2xl px-3 py-2.5 transition border ${isActive
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        onSelectSession(sess.id)
+                        onCloseMobile()
+                      }
+                    }}
+                    className={`group relative w-full text-left flex items-center justify-between rounded-2xl px-3 py-2.5 transition border cursor-pointer select-none ${isActive
                       ? 'border-[#BCC6FB] dark:border-[#38437A] bg-[#EEF1FF] dark:bg-indigo-950/40 shadow-[0_4px_12px_-5px_rgba(120,134,250,0.35)]'
                       : 'border-transparent hover:border-[#E2E6F8] dark:hover:border-[#2D3748] hover:bg-white dark:hover:bg-[#1A2038]'
                       }`}
                   >
                     <div className="flex items-center gap-3 min-w-0 flex-1">
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#DDE2FD] dark:bg-indigo-950/60 text-[#6F7DF0] dark:text-[#818CF8]">
+                      <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${isActive
+                        ? 'bg-[#D2DAFC] dark:bg-indigo-900/80 text-[#5F6FF0] dark:text-[#939BFB]'
+                        : 'bg-[#DDE2FD] dark:bg-indigo-950/60 text-[#6F7DF0] dark:text-[#818CF8]'
+                        }`}>
                         <MessageSquareText className="h-4.5 w-4.5" />
                       </div>
 
@@ -244,8 +289,22 @@ export default function Sidebar({
                       </div>
                     </div>
 
-                    <ChevronRight className="h-4 w-4 text-[#7C8CF8] shrink-0" />
-                  </button>
+                    <div className="flex items-center shrink-0 ml-1">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          setSessionToDelete({ id: sess.id, title })
+                        }}
+                        aria-label={`Hapus riwayat ${title}`}
+                        title="Hapus riwayat percakapan"
+                        className="p-1.5 rounded-xl text-[#8E95AF] hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/50 transition opacity-80 md:opacity-0 md:group-hover:opacity-100 focus:opacity-100"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                      <ChevronRight className="h-4 w-4 text-[#7C8CF8] shrink-0 hidden md:block md:group-hover:hidden transition" />
+                    </div>
+                  </div>
                 )
               })}
             </div>
@@ -375,6 +434,108 @@ export default function Sidebar({
       >
         {sidebarContent}
       </div>
+
+      {/* Delete Single Session Dialog */}
+      {sessionToDelete && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="delete-session-dialog-title"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        >
+          <div
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity"
+            onClick={() => setSessionToDelete(null)}
+          />
+          <div className="relative z-10 w-full max-w-sm overflow-hidden rounded-3xl border border-[#E6E9F8] dark:border-[#1E2540] bg-white dark:bg-[#151A2E] p-6 shadow-2xl transition-all">
+            <div className="flex items-start gap-4">
+              <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl bg-rose-100 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400">
+                <Trash2 className="h-5 w-5" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 id="delete-session-dialog-title" className="text-base font-bold text-[#2B3590] dark:text-[#F8FAFC]">
+                  Hapus Riwayat Sesi?
+                </h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-[#6B7399] dark:text-[#94A3B8]">
+                  Riwayat percakapan &quot;<span className="font-semibold text-[#2B3590] dark:text-[#F8FAFC]">{sessionToDelete.title}</span>&quot; akan dihapus secara permanen.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6 flex items-center justify-end gap-2.5">
+              <button
+                type="button"
+                onClick={() => setSessionToDelete(null)}
+                className="rounded-xl border border-[#DDE2F7] dark:border-[#1E2540] bg-white dark:bg-[#1A2038] px-4 py-2 text-xs font-semibold text-[#6B7399] dark:text-[#94A3B8] hover:bg-[#EEF1FF] dark:hover:bg-indigo-950/40 transition"
+              >
+                Batal
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  onDeleteSession(sessionToDelete.id)
+                  setSessionToDelete(null)
+                }}
+                className="inline-flex items-center gap-1.5 rounded-xl bg-rose-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-rose-700 active:scale-95 transition"
+              >
+                <Trash2 className="h-3.5 w-3.5" />
+                Hapus Sesi
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Clear All Sessions Dialog */}
+      {isConfirmClearAllOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="clear-all-sessions-dialog-title"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        >
+          <div
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity"
+            onClick={() => setIsConfirmClearAllOpen(false)}
+          />
+          <div className="relative z-10 w-full max-w-sm overflow-hidden rounded-3xl border border-[#E6E9F8] dark:border-[#1E2540] bg-white dark:bg-[#151A2E] p-6 shadow-2xl transition-all">
+            <div className="flex items-start gap-4">
+              <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl bg-rose-100 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400">
+                <Trash2 className="h-5 w-5" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 id="clear-all-sessions-dialog-title" className="text-base font-bold text-[#2B3590] dark:text-[#F8FAFC]">
+                  Hapus Semua Riwayat?
+                </h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-[#6B7399] dark:text-[#94A3B8]">
+                  Seluruh {sessions.length} riwayat percakapan akan dihapus secara permanen dari browser ini.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6 flex items-center justify-end gap-2.5">
+              <button
+                type="button"
+                onClick={() => setIsConfirmClearAllOpen(false)}
+                className="rounded-xl border border-[#DDE2F7] dark:border-[#1E2540] bg-white dark:bg-[#1A2038] px-4 py-2 text-xs font-semibold text-[#6B7399] dark:text-[#94A3B8] hover:bg-[#EEF1FF] dark:hover:bg-indigo-950/40 transition"
+              >
+                Batal
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  onClearAllSessions?.()
+                  setIsConfirmClearAllOpen(false)
+                }}
+                className="inline-flex items-center gap-1.5 rounded-xl bg-rose-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-rose-700 active:scale-95 transition"
+              >
+                <Trash2 className="h-3.5 w-3.5" />
+                Hapus Semua
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }
