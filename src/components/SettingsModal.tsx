@@ -80,9 +80,15 @@ export default function SettingsModal({
             </button>
           </div>
 
-          <div className="rounded-2xl border border-[var(--border-subtle)] p-3 text-center text-[11px] text-[var(--text-muted)] flex items-center justify-center gap-1.5">
-            <Heart className="h-3.5 w-3.5 text-[#7886FA]" />
-            <span>TemanRuang AI — Cerita aja, aku dengerin.</span>
+          <div className="rounded-2xl border border-[var(--border-subtle)] p-3.5 text-center text-[11px] text-[var(--text-muted)] flex flex-col items-center justify-center gap-1">
+            <div className="flex items-center gap-1.5">
+              <Heart className="h-3.5 w-3.5 text-[#7886FA] fill-current" />
+              <span className="font-semibold text-[var(--text-primary)]">TemanRuang AI</span>
+              <span className="text-[10px] text-[var(--text-muted)]">— Cerita aja, aku dengerin.</span>
+            </div>
+            <p className="text-[11px] text-[var(--text-secondary)] font-medium pt-0.5">
+              developed by : <span className="font-bold text-[#7886FA]">yukafii</span>
+            </p>
           </div>
         </div>
 

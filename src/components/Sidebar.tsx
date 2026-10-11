@@ -292,6 +292,14 @@ export default function Sidebar({
             >
               <ChevronRight className="h-4 w-4" />
             </button>
+
+            {/* Collapsed Credit Badge */}
+            <div
+              title="developed by : yukafii"
+              className="pt-0.5 text-[9px] font-bold text-[#8E95AF] dark:text-[#64748B] tracking-tight cursor-default"
+            >
+              by yf
+            </div>
           </div>
         ) : (
           <>
@@ -325,8 +333,12 @@ export default function Sidebar({
               <ChevronRight className="h-4 w-4 text-[#7C8CF8] shrink-0" />
             </button>
 
-            {/* Collapse Button */}
-            <div className="pt-1 flex justify-end">
+            {/* Collapse & Credit Footer Row */}
+            <div className="pt-2 flex items-center justify-between border-t border-[#E6E9F8] dark:border-[#1E2540]/80 mt-1">
+              <span className="text-[11px] font-medium text-[#8E95AF] dark:text-[#94A3B8] tracking-tight">
+                developed by : <span className="font-bold text-[#6F7DF0] dark:text-[#818CF8]">yukafii</span>
+              </span>
+
               <button
                 type="button"
                 onClick={onToggleCollapse}

@@ -176,6 +176,11 @@ TemanRuangAI/
 
 ---
 
+## 👨‍💻 Pengembang
+Developed by: **yukafii**
+
+---
+
 ## 📄 Lisensi
 Dilisensikan di bawah lisensi MIT.
 TemanRuang AI dibuat untuk mendukung kesejahteraan emosional secara positif dan inklusif.
