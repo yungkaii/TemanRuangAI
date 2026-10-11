@@ -129,11 +129,10 @@ export default function Sidebar({
               type="button"
               onClick={() => onSelectMode('listen')}
               title="Dengerin Aku"
-              className={`w-10 h-10 rounded-2xl flex items-center justify-center transition border ${
-                currentMode === 'listen'
-                  ? 'bg-[#EEF1FF] dark:bg-indigo-950/60 border-[#BCC6FB] text-[#7380FA] shadow-sm'
-                  : 'border-transparent text-[#7886FA] hover:bg-white/80 dark:hover:bg-[#1A2038]'
-              }`}
+              className={`w-10 h-10 rounded-2xl flex items-center justify-center transition border ${currentMode === 'listen'
+                ? 'bg-[#EEF1FF] dark:bg-indigo-950/60 border-[#BCC6FB] text-[#7380FA] shadow-sm'
+                : 'border-transparent text-[#7886FA] hover:bg-white/80 dark:hover:bg-[#1A2038]'
+                }`}
             >
               <Heart className="h-4 w-4 fill-current" />
             </button>
@@ -141,11 +140,10 @@ export default function Sidebar({
               type="button"
               onClick={() => onSelectMode('advice')}
               title="Kasih Aku Saran"
-              className={`w-10 h-10 rounded-2xl flex items-center justify-center transition border ${
-                currentMode === 'advice'
-                  ? 'bg-[#E0F2FE] dark:bg-sky-950/60 border-[#BAE6FD] text-[#38BDF8] shadow-sm'
-                  : 'border-transparent text-[#38BDF8] hover:bg-white/80 dark:hover:bg-[#1A2038]'
-              }`}
+              className={`w-10 h-10 rounded-2xl flex items-center justify-center transition border ${currentMode === 'advice'
+                ? 'bg-[#E0F2FE] dark:bg-sky-950/60 border-[#BAE6FD] text-[#38BDF8] shadow-sm'
+                : 'border-transparent text-[#38BDF8] hover:bg-white/80 dark:hover:bg-[#1A2038]'
+                }`}
             >
               <Lightbulb className="h-4 w-4" />
             </button>
@@ -153,11 +151,10 @@ export default function Sidebar({
               type="button"
               onClick={() => onSelectMode('solution')}
               title="Bantu Aku Cari Solusi"
-              className={`w-10 h-10 rounded-2xl flex items-center justify-center transition border ${
-                currentMode === 'solution'
-                  ? 'bg-[#DCFCE7] dark:bg-emerald-950/60 border-[#BBF7D0] text-[#22C55E] shadow-sm'
-                  : 'border-transparent text-[#22C55E] hover:bg-white/80 dark:hover:bg-[#1A2038]'
-              }`}
+              className={`w-10 h-10 rounded-2xl flex items-center justify-center transition border ${currentMode === 'solution'
+                ? 'bg-[#DCFCE7] dark:bg-emerald-950/60 border-[#BBF7D0] text-[#22C55E] shadow-sm'
+                : 'border-transparent text-[#22C55E] hover:bg-white/80 dark:hover:bg-[#1A2038]'
+                }`}
             >
               <Sprout className="h-4 w-4" />
             </button>
@@ -209,11 +206,10 @@ export default function Sidebar({
                         onCloseMobile()
                       }}
                       title={`${title}\n${preview}`}
-                      className={`w-10 h-10 flex items-center justify-center rounded-2xl transition border ${
-                        isActive
-                          ? 'border-[#BCC6FB] dark:border-[#38437A] bg-[#EEF1FF] dark:bg-indigo-950/60 text-[#7380FA] shadow-sm'
-                          : 'border-transparent hover:border-[#E2E6F8] dark:hover:border-[#2D3748] hover:bg-white dark:hover:bg-[#1A2038] text-[#6F7DF0] dark:text-[#94A3B8]'
-                      }`}
+                      className={`w-10 h-10 flex items-center justify-center rounded-2xl transition border ${isActive
+                        ? 'border-[#BCC6FB] dark:border-[#38437A] bg-[#EEF1FF] dark:bg-indigo-950/60 text-[#7380FA] shadow-sm'
+                        : 'border-transparent hover:border-[#E2E6F8] dark:hover:border-[#2D3748] hover:bg-white dark:hover:bg-[#1A2038] text-[#6F7DF0] dark:text-[#94A3B8]'
+                        }`}
                     >
                       <MessageSquareText className="h-4 w-4" />
                     </button>
@@ -228,11 +224,10 @@ export default function Sidebar({
                       onSelectSession(sess.id)
                       onCloseMobile()
                     }}
-                    className={`w-full text-left flex items-center justify-between rounded-2xl px-3 py-2.5 transition border ${
-                      isActive
-                        ? 'border-[#BCC6FB] dark:border-[#38437A] bg-[#EEF1FF] dark:bg-indigo-950/40 shadow-[0_4px_12px_-5px_rgba(120,134,250,0.35)]'
-                        : 'border-transparent hover:border-[#E2E6F8] dark:hover:border-[#2D3748] hover:bg-white dark:hover:bg-[#1A2038]'
-                    }`}
+                    className={`w-full text-left flex items-center justify-between rounded-2xl px-3 py-2.5 transition border ${isActive
+                      ? 'border-[#BCC6FB] dark:border-[#38437A] bg-[#EEF1FF] dark:bg-indigo-950/40 shadow-[0_4px_12px_-5px_rgba(120,134,250,0.35)]'
+                      : 'border-transparent hover:border-[#E2E6F8] dark:hover:border-[#2D3748] hover:bg-white dark:hover:bg-[#1A2038]'
+                      }`}
                   >
                     <div className="flex items-center gap-3 min-w-0 flex-1">
                       <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#DDE2FD] dark:bg-indigo-950/60 text-[#6F7DF0] dark:text-[#818CF8]">
@@ -295,7 +290,7 @@ export default function Sidebar({
 
             {/* Collapsed Credit Badge */}
             <div
-              title="developed by : yukafii"
+              title="Developed By : YUKAFII"
               className="pt-0.5 text-[9px] font-bold text-[#8E95AF] dark:text-[#64748B] tracking-tight cursor-default"
             >
               by yf
@@ -336,7 +331,7 @@ export default function Sidebar({
             {/* Collapse & Credit Footer Row */}
             <div className="pt-2 flex items-center justify-between border-t border-[#E6E9F8] dark:border-[#1E2540]/80 mt-1">
               <span className="text-[11px] font-medium text-[#8E95AF] dark:text-[#94A3B8] tracking-tight">
-                developed by : <span className="font-bold text-[#6F7DF0] dark:text-[#818CF8]">yukafii</span>
+                Developed By : <span className="font-bold text-[#6F7DF0] dark:text-[#818CF8]">YUKAFII</span>
               </span>
 
               <button
@@ -359,9 +354,8 @@ export default function Sidebar({
     <>
       {/* Desktop Sidebar */}
       <aside
-        className={`relative hidden md:flex flex-col flex-shrink-0 border-r border-[#E6E9F8] dark:border-[#1E2540] bg-[#FBFBFF] dark:bg-[#151A2E] transition-all duration-300 z-20 ${
-          isCollapsed ? 'w-[74px]' : 'w-72 lg:w-[310px]'
-        }`}
+        className={`relative hidden md:flex flex-col flex-shrink-0 border-r border-[#E6E9F8] dark:border-[#1E2540] bg-[#FBFBFF] dark:bg-[#151A2E] transition-all duration-300 z-20 ${isCollapsed ? 'w-[74px]' : 'w-72 lg:w-[310px]'
+          }`}
       >
         {sidebarContent}
       </aside>
@@ -376,9 +370,8 @@ export default function Sidebar({
 
       {/* Mobile Drawer */}
       <div
-        className={`md:hidden fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] bg-white dark:bg-[#151A2E] shadow-2xl transition-transform duration-300 ease-in-out border-r border-[#ECE8F6] dark:border-[#1E2540] ${
-          isMobileOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`md:hidden fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] bg-white dark:bg-[#151A2E] shadow-2xl transition-transform duration-300 ease-in-out border-r border-[#ECE8F6] dark:border-[#1E2540] ${isMobileOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
       >
         {sidebarContent}
       </div>
