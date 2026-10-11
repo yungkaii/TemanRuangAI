@@ -87,7 +87,7 @@ export default function SettingsModal({
               <span className="text-[10px] text-[var(--text-muted)]">— Cerita aja, aku dengerin.</span>
             </div>
             <p className="text-[11px] text-[var(--text-secondary)] font-medium pt-0.5">
-              developed by : <span className="font-bold text-[#7886FA]">yukafii</span>
+              Developed By : <span className="font-bold text-[#7886FA]">YUKAFII</span>
             </p>
           </div>
         </div>
